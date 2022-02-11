@@ -2,9 +2,15 @@
 public class Sessao{
 	 String hora;
 	 Double preco;
-	
+	 int disponiveis;
 
 	
+	public int getDisponiveis() {
+		return disponiveis;
+	}
+	public void setDisponiveis(int disponiveis) {
+		this.disponiveis = disponiveis;
+	}
 	public String getHora() {
 		return hora;
 	}

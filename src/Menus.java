@@ -1,6 +1,5 @@
 
 import java.util.Scanner;
-import javax.swing.JOptionPane;
 
 
 public class Menus {
@@ -10,7 +9,7 @@ public class Menus {
 	Filme filme = new Filme();
 	Scanner menu = new Scanner(System.in);
 	int opcao;
-	
+	int controle;
 	
 	public void menuPrincipal() {
 		
@@ -32,6 +31,7 @@ public class Menus {
 			break;
 		default:
 			System.out.println("Opção inválida.");
+			menuPrincipal();
 		}
 	}
 
@@ -78,6 +78,7 @@ public class Menus {
 			break;
 		default:
 			System.out.println("Opção inválida.");
+			menuPrincipal();
 		}
 	}
 
@@ -85,7 +86,7 @@ public class Menus {
 		int i = 1;
 		for(Sessao se:sessoes) {
    		 System.out.println("- Sessão "+i+" - \nPreço: R$"+se.getPreco());
-   		 System.out.println("Hora: "+se.getHora());
+   		 System.out.println("Hora: "+se.getHora()+"\nIngressos dispovíveis: "+se.getDisponiveis());
    		 System.out.println("--------------------------------");
    		 i++;
    	 }
@@ -100,31 +101,37 @@ public class Menus {
 		case 1:
 			carrinho.setPreco(sessoes[0].getPreco());
 			carrinho.setHora(sessoes[0].getHora());
+			controle = 0;
 			comprarIngresso();
 			break;
 		case 2:
 			carrinho.setPreco(sessoes[1].getPreco());
 			carrinho.setHora(sessoes[1].getHora());
+			controle = 1;
 			comprarIngresso();
 			break;
 			
 		case 3:
 			carrinho.setPreco(sessoes[2].getPreco());
 			carrinho.setHora(sessoes[2].getHora());
+			controle = 2;
 			comprarIngresso();
 			break;
 		case 4:
 			carrinho.setPreco(sessoes[3].getPreco());
 			carrinho.setHora(sessoes[3].getHora());
+			controle = 3;
 			comprarIngresso();
 			break;
 		case 5:
 			carrinho.setPreco(sessoes[4].getPreco());
 			carrinho.setHora(sessoes[4].getHora());
+			controle = 4;
 			comprarIngresso();
 			break;
 		default:
 			System.out.println("Opção inválida.");
+			menuPrincipal();
 		}
 	}
 	
@@ -132,12 +139,13 @@ public class Menus {
 		System.out.println("- CARRINHO DE COMPRAS -");
 		System.out.println("Filme: "+carrinho.getTitulo());
 		System.out.println("Duração: "+carrinho.getDuracao());
-		System.out.println("Preço do ingresso: "+carrinho.getPreco());
+		System.out.println("Preço do ingresso: R$"+String.format("%.2f", carrinho.getPreco()));
 		System.out.println("Hora: "+carrinho.getHora());
 		System.out.println("ESCOLHA A QUANTIDADE DE INGRESSOS: \n");
 		opcao = menu.nextInt();
         carrinho.setQuantidade(opcao);
 		carrinho.setTotal(carrinho.getPreco()*carrinho.getQuantidade());
+		sessoes[controle].setDisponiveis(sessoes[controle].getDisponiveis()-carrinho.getQuantidade());
 		menuFinal();
 	}
 	public void menuFinal() {
@@ -146,9 +154,19 @@ public class Menus {
 				"\nPreço do ingresso: R$"+String.format("%.2f", carrinho.getPreco())+" reais"+
 				"\nQuantidade de ingressos: "+carrinho.getQuantidade()+
 				"\nTotal: R$"+String.format("%.2f", carrinho.getTotal())+" reais\n"
-						+ "BOM FILME!");
+						+"BOM FILME!\n\n\n\nDigite 0 para voltar para o menu inicial: ");
+			opcao = menu.nextInt();
+			
+		switch(opcao) {
+			case 0:
+				menuPrincipal();
+				break;
+				
+			default:
 				System.exit(0);
-		
+				break;
+		}
+	
 	}
 	public void cadastrar() {
 		filmes[0] = new Filme();
@@ -171,25 +189,31 @@ public class Menus {
 		filmes[4].titulo = "Eternos";
 		filmes[4].duracao = "2:37 horas";
 		
+		
 		sessoes[0] = new Sessao();
 		sessoes[0].hora = "15:30";
 		sessoes[0].preco = 25.0;
+		sessoes[0].disponiveis = 35;
 		
 		sessoes[1] = new Sessao();
 		sessoes[1].hora = "16:00";
 		sessoes[1].preco = 23.0;
+		sessoes[1].disponiveis = 57;
 		
 		sessoes[2] = new Sessao();
 		sessoes[2].hora = "17:15";
 		sessoes[2].preco = 20.0;
+		sessoes[2].disponiveis = 43;
 		
 		sessoes[3] = new Sessao();
 		sessoes[3].hora = "19:00";
 		sessoes[3].preco = 25.0;
+		sessoes[3].disponiveis = 25;
 		
 		sessoes[4] = new Sessao();
 		sessoes[4].hora = "20:00";
 		sessoes[4].preco = 29.0;
+		sessoes[4].disponiveis = 49;
 		
 		}
 }
