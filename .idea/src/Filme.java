@@ -1,7 +1,7 @@
 
 public class Filme {
-	String titulo;
-	 String duracao;
+	private String titulo;
+	private String duracao;
 	
 	public String getTitulo() {
 	 	return titulo;
@@ -19,11 +19,6 @@ public class Filme {
 	public void setHora(String duracao) {
 		this.duracao = duracao;
 	}
-	
-	@Override
-	public String toString(){
-	    return "Filme: " + titulo +  " Duração: " + duracao;
-	}
-	
+
 }
 

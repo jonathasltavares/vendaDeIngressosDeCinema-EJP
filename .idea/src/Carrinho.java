@@ -1,11 +1,11 @@
 
 public class Carrinho  {
-	private String duracao;
+
 	private String titulo;
 	private double preco;
 	private String hora;
 	private double total;
-	int quantidade;
+	private int quantidade;
 	
 	public String getTitulo() {
 		return titulo;
@@ -36,15 +36,5 @@ public class Carrinho  {
 	}
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
-	}
-	public String getDuracao() {
-		return duracao;
-	}
-	public void setDuracao(String duracao) {
-		this.duracao = duracao;
-	}
-	@Override
-	public String toString(){
-	    return "Filme: " + titulo +  " Duração: " + duracao;
 	}
 }
