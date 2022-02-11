@@ -20,10 +20,7 @@ public class Filme {
 		this.duracao = duracao;
 	}
 	
-	@Override
-	public String toString(){
-	    return "Filme: " + titulo +  " Duração: " + duracao;
-	}
+	
 	
 }
 

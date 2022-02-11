@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 
@@ -52,29 +51,29 @@ public class Menus {
 			menuPrincipal();
 			break;
 		case 1:
-			carrinho.setTitulo("Homem-Aranha");
-			carrinho.setDuracao("2:28 horas");
-			sessoesFilme();
+			carrinho.setTitulo(filmes[0].getTitulo());
+			carrinho.setDuracao(filmes[0].getDuracao());
+			menuSessoes();
 			break;
 		case 2:
-			carrinho.setTitulo("Matrix");
-			carrinho.setDuracao("2:28 horas");
-			sessoesFilme();
+			carrinho.setTitulo(filmes[1].getTitulo());
+			carrinho.setDuracao(filmes[1].getDuracao());
+			menuSessoes();
 			break;
 		case 3:
-			carrinho.setTitulo("Turma da Mônica: Laços");
-			carrinho.setDuracao("1:37 horas");
-			sessoesFilme();
+			carrinho.setTitulo(filmes[2].getTitulo());
+			carrinho.setDuracao(filmes[2].getDuracao());
+			menuSessoes();
 			break;
 		case 4:
-			carrinho.setTitulo("Duna");
-			carrinho.setDuracao("2:35 horas");
-			sessoesFilme();
+			carrinho.setTitulo(filmes[3].getTitulo());
+			carrinho.setDuracao(filmes[3].getDuracao());
+			menuSessoes();
 			break;
 		case 5:
-			carrinho.setTitulo("Eternos");
-			carrinho.setDuracao("2:37 horas");
-			sessoesFilme();
+			carrinho.setTitulo(filmes[4].getTitulo());
+			carrinho.setDuracao(filmes[4].getDuracao());
+			menuSessoes();
 			break;
 		default:
 			System.out.println("Opção inválida.");
@@ -82,7 +81,7 @@ public class Menus {
 		}
 	}
 
-	public void sessoesFilme() {
+	public void menuSessoes() {
 		int i = 1;
 		for(Sessao se:sessoes) {
    		 System.out.println("- Sessão "+i+" - \nPreço: R$"+se.getPreco());
@@ -145,8 +144,27 @@ public class Menus {
 		opcao = menu.nextInt();
         carrinho.setQuantidade(opcao);
 		carrinho.setTotal(carrinho.getPreco()*carrinho.getQuantidade());
-		sessoes[controle].setDisponiveis(sessoes[controle].getDisponiveis()-carrinho.getQuantidade());
-		menuFinal();
+		if(carrinho.getQuantidade() > sessoes[controle].getDisponiveis()){
+			System.out.println("Quantidade de ingressos desejados maior do que os ingressos disponíveis."
+					+ "\nTente Novamente");
+			System.out.println("Digite 0 para voltar para as sessões: ");
+			
+		}else if(sessoes[controle].getDisponiveis() >= 0){
+			sessoes[controle].setDisponiveis(sessoes[controle].getDisponiveis()-carrinho.getQuantidade());
+			menuFinal();
+		}
+		opcao = menu.nextInt();
+		
+		switch(opcao) {
+			case 0:
+				menuSessoes();
+				break;
+				
+			default:
+				System.exit(0);
+				break;
+		}
+		
 	}
 	public void menuFinal() {
 		System.out.println("NOTA FISCAL: \n\nFilme: "+carrinho.getTitulo()+
@@ -166,7 +184,7 @@ public class Menus {
 				System.exit(0);
 				break;
 		}
-	
+		
 	}
 	public void cadastrar() {
 		filmes[0] = new Filme();

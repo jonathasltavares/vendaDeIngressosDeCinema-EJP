@@ -43,8 +43,5 @@ public class Carrinho  {
 	public void setDuracao(String duracao) {
 		this.duracao = duracao;
 	}
-	@Override
-	public String toString(){
-	    return "Filme: " + titulo +  " Duração: " + duracao;
-	}
+	
 }

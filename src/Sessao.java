@@ -23,9 +23,6 @@ public class Sessao{
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
-	@Override
-	public String toString(){
-	    return "Hora: " + hora +  " Preço: " + preco;
-	}
+	
 	
 }
